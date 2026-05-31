@@ -17,16 +17,18 @@ export default function Hero() {
         {/* Badge */}
         <div className="flex items-center justify-center gap-2 inline-flex mx-auto px-4 py-2 rounded-full border border-blue-500/30 bg-blue-500/5 glow-blue">
           <Sparkles className="w-4 h-4 text-blue-400" />
-          <span className="text-sm text-blue-300">AI-Powered Property Discovery</span>
+          <span className="text-sm text-blue-300">
+          Next.js • Telegram Bot API • Vercel
+          </span>
         </div>
 
         {/* Main heading */}
         <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold leading-tight text-balance">
           <span className="bg-gradient-to-r from-blue-300 via-blue-400 to-cyan-300 bg-clip-text text-transparent">
-            Find Your Dream Home
+          AI Property Assistant
           </span>
           <br />
-          with AI Assistance
+          Real-Time Lead Management
         </h1>
 
         {/* Subheading */}
