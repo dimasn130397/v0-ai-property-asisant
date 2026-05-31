@@ -35,6 +35,20 @@ export default function Hero() {
         <p className="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto text-balance leading-relaxed">
           Meet your intelligent property assistant. Get instant information, pricing, and schedule surveys with our advanced AI chatbot powered by machine learning.
         </p>
+        <div className="flex flex-wrap justify-center gap-3 pt-4">
+  <span className="px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-300 text-sm">
+    Next.js
+  </span>
+  <span className="px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-300 text-sm">
+    TypeScript
+  </span>
+  <span className="px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-300 text-sm">
+    Telegram Bot API
+  </span>
+  <span className="px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-300 text-sm">
+    Vercel
+  </span>
+</div>
 
         {/* CTA Buttons */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center pt-8">
