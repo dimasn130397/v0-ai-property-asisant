@@ -4,20 +4,31 @@ export async function POST(req: Request) {
   try {
     const body = await req.json();
 
-    const text = `
-🏡 New Property Inquiry
+  const text = `
+🏡 NEW PROPERTY LEAD
 
-👤 Name: ${body.name}
-📧 Email: ${body.email}
-📱 Phone: ${body.phone}
+━━━━━━━━━━
 
-📅 Date: ${body.date}
-⏰ Time: ${body.time}
+👤 Client
+Name: ${body.name}
 
-🏠 Property: ${body.property}
+📧 Contact
+Email: ${body.email}
+Phone: ${body.phone}
 
-📝 Notes:
+📅 Schedule
+Date: ${body.date}
+Time: ${body.time}
+
+🏠 Property Interest
+${body.property}
+
+📝 Notes
 ${body.notes}
+
+━━━━━━━━━━
+
+Generated from AI Property Assistant
 `;
 
     await fetch(
