@@ -5,10 +5,46 @@ import { Calendar, Clock, User, Phone, Mail } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 export default function SurveyBooking() {
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    alert('Survey booking request submitted! Our team will confirm shortly.');
-  };
+  const [formData, setFormData] = useState({
+  name: '',
+  email: '',
+  phone: '',
+  date: '',
+  time: '',
+  property: '',
+  notes: '',
+});
+  const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+
+  try {
+    const response = await fetch('/api/telegram', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData),
+    });
+
+    if (response.ok) {
+      alert('Survey request sent successfully!');
+
+      setFormData({
+        name: '',
+        email: '',
+        phone: '',
+        date: '',
+        time: '',
+        property: '',
+        notes: '',
+      });
+    } else {
+      alert('Failed to send request.');
+    }
+  } catch (error) {
+    alert('Something went wrong.');
+  }
+};
 
   return (
     <section className="relative py-20 lg:py-32 px-4">
@@ -41,11 +77,15 @@ export default function SurveyBooking() {
                   Full Name
                 </label>
                 <input
-                  type="text"
-                  placeholder="Your name"
-                  required
-                  className="w-full px-4 py-3 rounded-lg bg-blue-950/40 border border-blue-500/30 text-white placeholder-gray-500 focus:outline-none focus:border-blue-400/50 transition-colors"
-                />
+  type="text"
+  placeholder="Your name"
+  required
+  value={formData.name}
+  onChange={(e) =>
+    setFormData({ ...formData, name: e.target.value })
+  }
+  className="w-full px-4 py-3 rounded-lg bg-blue-950/40 border border-blue-500/30 text-white placeholder-gray-500 focus:outline-none focus:border-blue-400/50 transition-colors"
+/>
               </div>
 
               {/* Email */}
@@ -55,11 +95,15 @@ export default function SurveyBooking() {
                   Email Address
                 </label>
                 <input
-                  type="email"
-                  placeholder="your@email.com"
-                  required
-                  className="w-full px-4 py-3 rounded-lg bg-blue-950/40 border border-blue-500/30 text-white placeholder-gray-500 focus:outline-none focus:border-blue-400/50 transition-colors"
-                />
+  type="email"
+  placeholder="your@email.com"
+  required
+  value={formData.email}
+  onChange={(e) =>
+    setFormData({ ...formData, email: e.target.value })
+  }
+  className="w-full px-4 py-3 rounded-lg bg-blue-950/40 border border-blue-500/30 text-white placeholder-gray-500 focus:outline-none focus:border-blue-400/50 transition-colors"
+/>
               </div>
 
               {/* Phone */}
@@ -69,11 +113,15 @@ export default function SurveyBooking() {
                   Phone Number
                 </label>
                 <input
-                  type="tel"
-                  placeholder="+62 (812) 345-6789"
-                  required
-                  className="w-full px-4 py-3 rounded-lg bg-blue-950/40 border border-blue-500/30 text-white placeholder-gray-500 focus:outline-none focus:border-blue-400/50 transition-colors"
-                />
+  type="tel"
+  placeholder="+62 (812) 345-6789"
+  required
+  value={formData.phone}
+  onChange={(e) =>
+    setFormData({ ...formData, phone: e.target.value })
+  }
+  className="w-full px-4 py-3 rounded-lg bg-blue-950/40 border border-blue-500/30 text-white placeholder-gray-500 focus:outline-none focus:border-blue-400/50 transition-colors"
+/>
               </div>
 
               {/* Date */}
@@ -83,10 +131,14 @@ export default function SurveyBooking() {
                   Preferred Date
                 </label>
                 <input
-                  type="date"
-                  required
-                  className="w-full px-4 py-3 rounded-lg bg-blue-950/40 border border-blue-500/30 text-white placeholder-gray-500 focus:outline-none focus:border-blue-400/50 transition-colors"
-                />
+  type="date"
+  required
+  value={formData.date}
+  onChange={(e) =>
+    setFormData({ ...formData, date: e.target.value })
+  }
+  className="w-full px-4 py-3 rounded-lg bg-blue-950/40 border border-blue-500/30 text-white placeholder-gray-500 focus:outline-none focus:border-blue-400/50 transition-colors"
+/>
               </div>
 
               {/* Time */}
@@ -96,42 +148,54 @@ export default function SurveyBooking() {
                   Preferred Time
                 </label>
                 <select
-                  required
-                  className="w-full px-4 py-3 rounded-lg bg-blue-950/40 border border-blue-500/30 text-white placeholder-gray-500 focus:outline-none focus:border-blue-400/50 transition-colors"
-                >
-                  <option value="">Select time</option>
-                  <option value="09:00">09:00 AM</option>
-                  <option value="10:00">10:00 AM</option>
-                  <option value="11:00">11:00 AM</option>
-                  <option value="14:00">02:00 PM</option>
-                  <option value="15:00">03:00 PM</option>
-                  <option value="16:00">04:00 PM</option>
-                </select>
+  required
+  value={formData.time}
+  onChange={(e) =>
+    setFormData({ ...formData, time: e.target.value })
+  }
+  className="w-full px-4 py-3 rounded-lg bg-blue-950/40 border border-blue-500/30 text-white placeholder-gray-500 focus:outline-none focus:border-blue-400/50 transition-colors"
+>
+  <option value="">Select time</option>
+  <option value="09:00">09:00 AM</option>
+  <option value="10:00">10:00 AM</option>
+  <option value="11:00">11:00 AM</option>
+  <option value="14:00">02:00 PM</option>
+  <option value="15:00">03:00 PM</option>
+  <option value="16:00">04:00 PM</option>
+</select>
               </div>
 
               {/* Property Interest */}
               <div className="space-y-2">
                 <label className="text-sm font-medium text-blue-300">Property of Interest</label>
                 <select
-                  required
-                  className="w-full px-4 py-3 rounded-lg bg-blue-950/40 border border-blue-500/30 text-white placeholder-gray-500 focus:outline-none focus:border-blue-400/50 transition-colors"
-                >
-                  <option value="">Select property</option>
-                  <option value="modern">Modern Family Home</option>
-                  <option value="luxury">Luxury Residence</option>
-                  <option value="cozy">Cozy Apartment</option>
-                </select>
+  required
+  value={formData.property}
+  onChange={(e) =>
+    setFormData({ ...formData, property: e.target.value })
+  }
+  className="w-full px-4 py-3 rounded-lg bg-blue-950/40 border border-blue-500/30 text-white placeholder-gray-500 focus:outline-none focus:border-blue-400/50 transition-colors"
+>
+  <option value="">Select property</option>
+  <option value="modern">Modern Family Home</option>
+  <option value="luxury">Luxury Residence</option>
+  <option value="cozy">Cozy Apartment</option>
+</select>
               </div>
             </div>
 
             {/* Message */}
             <div className="space-y-2">
               <label className="text-sm font-medium text-blue-300">Additional Notes</label>
-              <textarea
-                placeholder="Tell us about your preferences or questions..."
-                rows={4}
-                className="w-full px-4 py-3 rounded-lg bg-blue-950/40 border border-blue-500/30 text-white placeholder-gray-500 focus:outline-none focus:border-blue-400/50 transition-colors resize-none"
-              />
+             <textarea
+  placeholder="Tell us about your preferences or questions..."
+  rows={4}
+  value={formData.notes}
+  onChange={(e) =>
+    setFormData({ ...formData, notes: e.target.value })
+  }
+  className="w-full px-4 py-3 rounded-lg bg-blue-950/40 border border-blue-500/30 text-white placeholder-gray-500 focus:outline-none focus:border-blue-400/50 transition-colors resize-none"
+/>
             </div>
 
             {/* Submit Button */}
